@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>
+            {% block title %}My shop
+            {% endblock %}
+        </title>
+
+        <link rel="stylesheet" type="text/css" href="{% static 'bootstrap-5.0.2-dist/css/bootstrap.min.css' %}">
+        <link href="{% static 'css/base.css' %}" rel="stylesheet">
+    </head>
+    <body>
+
+            <nav class="navbar">
+                            <ul class="nav-links">
+                                <li><a href="{% url 'shop:product_list' %}">Home</a></li>
+                                <li><a href="#">Aditya Maskar</a></li>
+                                <li class="nav-item dropdown">
+                              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: black">
+                                About Us
+                              </a>
+                              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="https://www.instagram.com/aditya.maskar/">Instagram</a></li>
+                                <li><a class="dropdown-item" href="https://www.facebook.com/aditya.maskar.92">Facebook</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="https://twitter.com/aditya_maskar">Twitter</a></li>
+                                <li><a class="dropdown-item" href="https://www.linkedin.com/in/aditya-maskar-11318819a/?originalSubdomain=in">Linkdin</a></li>
+                              </ul>
+                            </li>
+                            </ul>
+            </nav>
+
+
+        <div id="subheader">
+            <div class="cart">
+                 {% with total_items=cart|length %}
+                     {% if total_items > 0 %}
+                         Your cart:
+                         <a href="{% url 'cart:cart_detail' %}">
+                         {{ total_items }}item{{ total_items|pluralize }},${{ cart.get_total_price }}
+                         </a>
+                     {% else %}
+                         Your cart is empty.
+                     {% endif %}
+                 {% endwith %}
+            </div>
+        </div>
+        <div id="content"> {% block content %}{% endblock %}
+            </div>
+        </body>
+    </html>
