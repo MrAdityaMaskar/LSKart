@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from django.contrib.auth.admin import UserAdmin
-from .models import User, UserType
+from .models import CustomUser, UserType
 # Register your models here.
 
 
@@ -37,7 +37,7 @@ from .forms import UserCreationForm, UserChangeForm
 class UserAdmin(UserAdmin):
     add_form =UserCreationForm
     form = UserChangeForm
-    model= User
+    model= CustomUser
     
     list_display = ('username','email','first_name', 'last_name', 'is_staff', 'is_active')
 
@@ -49,7 +49,7 @@ class UserAdmin(UserAdmin):
     add_fieldsets= (
         (None,{
             'classes': ('wide',) ,# class for css
-            'fields': ('username','email', 'password1', 'password2','phone','address', 'is_staff', 'is_active')
+            'fields': ('username','email', 'password1', 'password2','phone','address', 'usertype','groups', 'is_staff', 'is_active')
         }),
     )
     
@@ -57,5 +57,5 @@ class UserAdmin(UserAdmin):
     ordering = ('username', 'email',)
     
     
-admin.site.register(User, UserAdmin)
+admin.site.register(CustomUser, UserAdmin)
 admin.site.register(UserType)

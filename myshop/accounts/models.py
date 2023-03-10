@@ -5,7 +5,7 @@ from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
 from django.contrib.auth.models import PermissionsMixin
-from .managers import UserManager
+from .managers import CustomUserManager
 
 
 class UserType(models.Model):
@@ -24,19 +24,19 @@ class UserType(models.Model):
     
     
 
-class User(AbstractUser, PermissionsMixin):
+class CustomUser(AbstractUser, PermissionsMixin):
     
     date_joined = models.DateTimeField(default= timezone.now)
     usertype = models.ManyToManyField(UserType)
     username= models.CharField(_("Username"), max_length=50,primary_key=True)
     email = models.EmailField(_('email address main'), unique=True)
-    phone = models.CharField(max_length=12)
+    phone = models.CharField(max_length=12, unique=True)
     address = models.CharField(max_length=10)
     USERNAME_FIELD = 'email'
     
     REQUIRED_FIELDS= ['username','first_name','last_name', 'phone','address']
     
-    objects = UserManager()
+    objects = CustomUserManager()
     
     def __str__(self):
         return self.email

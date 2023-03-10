@@ -6,7 +6,10 @@ from orders.models import Order
 # instantiate Braintree payment gateway
 gateway = braintree.BraintreeGateway(settings.BRAINTREE_CONF)
 
+from django.contrib.auth.decorators import login_required
 
+
+@login_required
 def payment_process(request):
     order_id = request.session.get('order_id')
     order = get_object_or_404(Order, id=order_id)
@@ -30,11 +33,11 @@ def payment_process(request):
         client_token = gateway.client_token.generate()
         return render(request,'payment/process.html',{'order': order,'client_token': client_token})
     
-    
+@login_required
 def payment_done(request):
     return render(request, 'payment/done.html')
 
-
+@login_required
 def payment_canceled(request):
     return render(request, 'payment/canceled.html')
 

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'orders.apps.OrdersConfig',
     'payment.apps.PaymentConfig',
     'accounts',
+    'bootstrap3',
 ]
 
 MIDDLEWARE = [
@@ -156,8 +157,7 @@ BRAINTREE_CONF = braintree.Configuration(
  BRAINTREE_PRIVATE_KEY
 )
 
-AUTH_USER_MODEL = 'accounts.User'
-ACCOUNT_USER_MODEL_USERNAME_FIELD = None
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_USERNAME_REQUIRED = False
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
+
+LOGIN_URL = '/accounts/login/'
