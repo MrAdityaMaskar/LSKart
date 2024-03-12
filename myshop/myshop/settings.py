@@ -146,16 +146,8 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=False, cast=bool)
 
-BRAINTREE_MERCHANT_ID = 'xvn66wk8jsnsfb56' # Merchant ID
-BRAINTREE_PUBLIC_KEY = 'kz7gdnc57bj3trmc' # Public Key
-BRAINTREE_PRIVATE_KEY = 'eac363097c363a346b1e494ccee8abf6' # Private key
 
-BRAINTREE_CONF = braintree.Configuration(
- braintree.Environment.Sandbox,
- BRAINTREE_MERCHANT_ID,
- BRAINTREE_PUBLIC_KEY,
- BRAINTREE_PRIVATE_KEY
-)
+
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
